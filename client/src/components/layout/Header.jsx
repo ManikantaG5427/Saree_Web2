@@ -115,21 +115,21 @@ export function Header() {
       {/* ================= FIXED TOP NAVIGATION (ALWAYS PINNED ON SCROLL) ================= */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#F0C860]/40 shadow-sm transition-all">
         {/* ================= SECTION A: ANNOUNCEMENT STRIP ================= */}
-        <div className="bg-[#280030] text-[#FFF8F0] border-b border-[#F0C860]/30 py-1.5 px-4 text-xs font-medium">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <div className="bg-[#280030] text-[#FFF8F0] border-b border-[#F0C860]/30 py-1.5 px-3 sm:px-6 lg:px-8 text-xs font-medium">
+          <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-2 sm:gap-4">
             {/* Left: Concise Verified Brand Heritage */}
-            <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
-              <span className="bg-[#F0C860] text-[#280030] font-bold px-2 py-0.5 rounded-xs text-[9px] uppercase tracking-widest flex items-center gap-1 shadow-xs">
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden whitespace-nowrap min-w-0">
+              <span className="bg-[#F0C860] text-[#280030] font-bold px-1.5 sm:px-2 py-0.5 rounded-xs text-[9px] uppercase tracking-widest flex items-center gap-1 shadow-xs shrink-0">
                 <Award className="w-3 h-3" />
-                Established 2003
+                <span>Estd 2003</span>
               </span>
-              <span className="text-stone-300 text-[11px] tracking-wide truncate">
+              <span className="text-stone-300 text-[10.5px] sm:text-[11px] tracking-wide truncate">
                 Pattu Sarees • Wholesale & Retail • Hyderabad • Complimentary Fall & Pico
               </span>
             </div>
 
             {/* Right: Verified WhatsApp & Video Drape */}
-            <div className="flex items-center gap-4 text-[11px] flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-4 text-[10.5px] sm:text-[11px] shrink-0">
               <button
                 onClick={() => setIsVideoModalOpen(true)}
                 className="hidden md:flex items-center gap-1.5 text-[#F0C860] hover:text-white transition-colors cursor-pointer"
@@ -144,32 +144,33 @@ export function Header() {
                 href="https://wa.me/918639140385?text=Hello%20Sri%20Lakshmi%20Saree%20House,%20I%20would%20like%20to%20inquire%20about%20your%20Pattu%20sarees"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-white hover:text-[#F0C860] transition-colors"
+                className="flex items-center gap-1 text-white hover:text-[#F0C860] transition-colors whitespace-nowrap"
               >
                 <span className="text-[#426B46] font-bold">●</span>
-                <span>WhatsApp: +91 86391 40385</span>
+                <span className="hidden xs:inline">WhatsApp:</span>
+                <span>+91 86391 40385</span>
               </a>
             </div>
           </div>
         </div>
 
         {/* ================= SECTION B: MAIN NAVIGATION ================= */}
-        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 sm:h-[84px] gap-2 lg:gap-6">
+        <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20 lg:h-[84px] gap-2 lg:gap-4 xl:gap-6">
             {/* Left: Mobile Toggle & Brand Logo */}
-            <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 min-w-0">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-[#280030] hover:bg-[#FFF8F0] rounded-xs cursor-pointer transition-colors"
+                className="lg:hidden p-1.5 sm:p-2 text-[#280030] hover:bg-[#FFF8F0] rounded-xs cursor-pointer transition-colors"
                 aria-label="Toggle Navigation Menu"
               >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
               </button>
 
               <Link 
                 to="/" 
                 onClick={handleHomeClick}
-                className="flex items-center gap-2 group py-1 cursor-pointer" 
+                className="flex items-center gap-2 group py-1 cursor-pointer shrink-0" 
                 aria-label="Sri Lakshmi Saree House Home"
               >
                 <Logo variant="full" />
@@ -177,12 +178,12 @@ export function Header() {
             </div>
 
             {/* Center: Desktop Navigation Bar */}
-            <nav className="hidden lg:flex items-center gap-2 xl:gap-3.5 2xl:gap-5 flex-shrink-0">
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2.5 2xl:gap-4 shrink min-w-0">
               {/* Dedicated Home Button */}
               <button
                 type="button"
                 onClick={handleHomeClick}
-                className={`text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group cursor-pointer ${
+                className={`text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group cursor-pointer ${
                   location.pathname === '/' ? 'text-[#280030] font-bold' : 'text-[#29232A] hover:text-[#280030]'
                 }`}
                 aria-label="Home page hero"
@@ -195,13 +196,13 @@ export function Header() {
 
               {/* Collections Dropdown */}
               <div
-                className="relative py-2 group/menu flex-shrink-0"
+                className="relative py-2 group/menu shrink-0"
                 onMouseEnter={() => setIsMegaMenuOpen(true)}
                 onMouseLeave={() => setIsMegaMenuOpen(false)}
               >
                 <button
                   type="button"
-                  className="flex items-center gap-1 text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.14em] uppercase text-[#29232A] group-hover/menu:text-[#280030] cursor-pointer whitespace-nowrap py-1"
+                  className="flex items-center gap-1 text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] group-hover/menu:text-[#280030] cursor-pointer whitespace-nowrap px-1.5 py-1"
                 >
                   <span>Shop Sarees</span>
                   <ChevronDown className="w-3.5 h-3.5 text-stone-400 group-hover/menu:rotate-180 transition-transform duration-200" />
@@ -360,7 +361,7 @@ export function Header() {
               <Link
                 to="/shop?category=Handloom Pattu Sarees"
                 onClick={handleNavClick('/shop?category=Handloom Pattu Sarees')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
+                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Handloom Pattu</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -369,34 +370,34 @@ export function Header() {
               <Link
                 to="/shop?occasion=Weddings"
                 onClick={handleNavClick('/shop?occasion=Weddings')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
+                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Bridal<span className="hidden xl:inline"> Trousseau</span></span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
 
               <Link
-                to="/handloom-guide"
-                onClick={handleNavClick('/handloom-guide')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
-              >
-                <span>Weave Guide</span>
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-
-              <Link
                 to="/wholesale"
                 onClick={handleNavClick('/wholesale')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#BD3D78] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
+                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#BD3D78] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Wholesale</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
 
               <Link
+                to="/handloom-guide"
+                onClick={handleNavClick('/handloom-guide')}
+                className="hidden xl:inline-block text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
+              >
+                <span>Weave Guide</span>
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </Link>
+
+              <Link
                 to="/about"
                 onClick={handleNavClick('/about')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
+                className="hidden xl:inline-block text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Our Story</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -405,7 +406,7 @@ export function Header() {
               <Link
                 to="/contact"
                 onClick={handleNavClick('/contact')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
+                className="hidden 2xl:inline-block text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Contact</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -413,25 +414,25 @@ export function Header() {
             </nav>
 
             {/* Right: Search, Wishlist, Bag, Account / Admin */}
-            <div className="flex items-center gap-2 sm:gap-2.5 flex-shrink-0 pr-1 sm:pr-2">
+            <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0">
               {/* Search Trigger */}
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="w-9 h-9 flex items-center justify-center rounded-full text-[#29232A] hover:text-[#280030] hover:bg-[#FFF8F0] transition-colors cursor-pointer"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full text-[#29232A] hover:text-[#280030] hover:bg-[#FFF8F0] transition-colors cursor-pointer"
                 aria-label="Search sarees"
               >
-                <Search className="w-4.5 h-4.5" />
+                <Search className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </button>
 
               {/* Wishlist */}
               <Link
                 to="/wishlist"
-                className="relative w-9 h-9 flex items-center justify-center rounded-full text-[#29232A] hover:text-[#BD3D78] hover:bg-[#FFF8F0] transition-colors"
+                className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full text-[#29232A] hover:text-[#BD3D78] hover:bg-[#FFF8F0] transition-colors"
                 aria-label={`Wishlist, ${wishlistCount} items`}
               >
-                <Heart className="w-4.5 h-4.5" />
+                <Heart className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#BD3D78] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-[#BD3D78] text-white text-[9px] sm:text-[10px] font-bold rounded-full flex items-center justify-center">
                     {wishlistCount}
                   </span>
                 )}
@@ -441,28 +442,28 @@ export function Header() {
               <button
                 type="button"
                 onClick={openCart}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#280030] hover:bg-[#3b0347] text-[#FFF8F0] rounded-full transition-all shadow-xs cursor-pointer hover:shadow-md"
+                className="flex items-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-1.5 bg-[#280030] hover:bg-[#3b0347] text-[#FFF8F0] rounded-full transition-all shadow-xs cursor-pointer hover:shadow-md"
                 aria-label={`Shopping Bag, ${itemCount} items`}
               >
-                <ShoppingBag className="w-4 h-4 text-[#F0C860]" />
-                <span className="text-[11px] font-semibold uppercase tracking-wider hidden sm:inline">Bag</span>
-                <span className="w-4 h-4 bg-[#F0C860] text-[#280030] text-[10px] font-bold rounded-full flex items-center justify-center">
+                <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F0C860]" />
+                <span className="text-[11px] font-semibold uppercase tracking-wider hidden md:inline">Bag</span>
+                <span className="w-4 h-4 bg-[#F0C860] text-[#280030] text-[9.5px] sm:text-[10px] font-bold rounded-full flex items-center justify-center">
                   {itemCount}
                 </span>
               </button>
 
-              {/* Account / Admin Link */}
+              {/* Account / Admin Link - Always Fully Visible On All Devices */}
               {user ? (
-                <div className="relative group/user py-2 pl-1">
+                <div className="relative group/user py-1 sm:py-2">
                   <Link
                     to={user.role === 'admin' ? '/admin' : '/account'}
-                    className="flex items-center gap-1.5 text-xs font-semibold text-[#280030] bg-[#FFF8F0] hover:bg-[#F5EBE1] border border-[#E8DFE5] hover:border-[#280030]/40 px-2 sm:px-2.5 py-1 rounded-full transition-all shadow-2xs"
+                    className="flex items-center gap-1 sm:gap-1.5 text-xs font-semibold text-[#280030] bg-[#FFF8F0] hover:bg-[#F5EBE1] border border-[#E8DFE5] hover:border-[#280030]/40 px-1.5 sm:px-2.5 py-1 rounded-full transition-all shadow-2xs"
                     aria-label="User Account"
                   >
-                    <div className="w-6 h-6 rounded-full bg-[#280030] text-[#F0C860] flex items-center justify-center font-bold text-xs ring-1 ring-[#F0C860]/70 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-[#280030] text-[#F0C860] flex items-center justify-center font-bold text-[11px] ring-1 ring-[#F0C860]/70 shrink-0">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="hidden xl:inline max-w-[80px] truncate text-[11px] font-semibold text-[#280030]">{user.name}</span>
+                    <span className="hidden xl:inline max-w-[70px] truncate text-[11px] font-semibold text-[#280030]">{user.name}</span>
                   </Link>
 
                   {/* Dropdown Menu */}
@@ -501,7 +502,7 @@ export function Header() {
               ) : (
                 <Link
                   to="/login"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#280030] bg-[#FFF8F0] hover:bg-[#280030] hover:text-[#F0C860] border border-[#280030]/25 hover:border-[#280030] rounded-full transition-all shadow-2xs whitespace-nowrap ml-0.5"
+                  className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#280030] bg-[#FFF8F0] hover:bg-[#280030] hover:text-[#F0C860] border border-[#280030]/25 hover:border-[#280030] rounded-full transition-all shadow-2xs whitespace-nowrap shrink-0"
                   aria-label="Account Login"
                 >
                   <User className="w-3.5 h-3.5 text-[#BD3D78]" />
@@ -567,7 +568,7 @@ export function Header() {
       </header>
 
       {/* Fixed Header Spacer: Prevents page content from getting hidden under fixed navbar */}
-      <div className="h-[112px] sm:h-[120px] w-full shrink-0" aria-hidden="true" />
+      <div className="h-[96px] sm:h-[112px] lg:h-[120px] w-full shrink-0" aria-hidden="true" />
 
       {/* Mobile Menu Drawer */}
       {isMobileMenuOpen && (
@@ -582,6 +583,39 @@ export function Header() {
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-white p-1">
                 <X className="w-6 h-6" />
               </button>
+            </div>
+
+            {/* Mobile User Account / Login Bar (Prominently Accessible On Phones) */}
+            <div className="p-3.5 bg-[#FFF8F0] border-b border-[#E8DFE5]">
+              {user ? (
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-full bg-[#280030] text-[#F0C860] flex items-center justify-center font-bold text-xs ring-1 ring-[#F0C860] shrink-0">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="truncate">
+                      <p className="text-xs font-bold text-[#280030] truncate">{user.name}</p>
+                      <p className="text-[10px] text-[#706873] truncate">{user.email}</p>
+                    </div>
+                  </div>
+                  <Link
+                    to={user.role === 'admin' ? '/admin' : '/account'}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-[11px] font-bold text-[#BD3D78] hover:underline shrink-0 ml-2"
+                  >
+                    {user.role === 'admin' ? 'Admin Studio' : 'My Account'} →
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 bg-[#280030] hover:bg-[#3b0347] text-[#FFF8F0] rounded-xs text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
+                >
+                  <User className="w-4 h-4 text-[#F0C860]" />
+                  <span>Login / Sign In</span>
+                </Link>
+              )}
             </div>
 
             {/* Mobile Links */}

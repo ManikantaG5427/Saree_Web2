@@ -11,7 +11,8 @@ import {
   Share2, 
   Check, 
   ArrowLeft,
-  Scissors
+  Scissors,
+  Sparkles
 } from 'lucide-react';
 import { useProducts } from '../contexts/ProductContext.jsx';
 import { useCart } from '../contexts/CartContext.jsx';
@@ -202,6 +203,17 @@ export function ProductDetail() {
 
             {/* Weave Attributes Box */}
             <div className="bg-white border border-[#E8DFE5] rounded-xs p-4 divide-y divide-[#E8DFE5] text-xs">
+              {product.designDetail && (
+                <div className="pb-3 flex flex-col gap-1">
+                  <div className="flex items-center gap-1.5 text-[#BD3D78] font-bold uppercase tracking-wider text-[11px]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#F0C860]" />
+                    <span>Signature Weave & Motif Architecture</span>
+                  </div>
+                  <p className="text-xs text-[#280030] font-semibold leading-relaxed bg-[#FAF7F2] p-2.5 rounded-xs border border-[#F0C860]/40">
+                    {product.designDetail}
+                  </p>
+                </div>
+              )}
               <div className="py-2 flex justify-between">
                 <span className="text-[#706873]">Fabric:</span>
                 <span className="font-bold text-[#29232A]">{product.fabric}</span>

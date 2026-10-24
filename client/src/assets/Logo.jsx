@@ -188,9 +188,9 @@ export function Logo({ variant = 'full', className = '', isDark = false, size = 
 
   // Full Brand Lockup (Emblem + "SRI LAKSHMI SAREE HOUSE" — Compact, Never Overflows)
   return (
-    <div className={`flex items-center gap-2.5 sm:gap-3 select-none flex-shrink-0 ${className}`}>
+    <div className={`flex items-center gap-2 sm:gap-2.5 lg:gap-3 select-none flex-shrink-0 ${className}`}>
       {/* Medallion Emblem */}
-      <div className="w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0">
+      <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 flex-shrink-0">
         {emblemSvg}
       </div>
 
@@ -198,7 +198,7 @@ export function Logo({ variant = 'full', className = '', isDark = false, size = 
       <div className="flex flex-col justify-center leading-none">
         {/* Line 1: SRI LAKSHMI */}
         <span
-          className="font-serif text-[15px] sm:text-[17px] font-extrabold tracking-[0.14em] uppercase"
+          className="font-serif text-[13px] sm:text-[15px] lg:text-[17px] font-extrabold tracking-[0.12em] sm:tracking-[0.14em] uppercase"
           style={{
             color: isDark ? '#F0C860' : '#280030',
             textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.4)' : 'none',
@@ -208,15 +208,15 @@ export function Logo({ variant = 'full', className = '', isDark = false, size = 
         </span>
 
         {/* Line 2: SAREE HOUSE · ESTD 2003 */}
-        <div className="flex items-center gap-1.5 mt-1">
+        <div className="flex items-center gap-1 sm:gap-1.5 mt-0.5 sm:mt-1">
           <span
-            className="font-serif text-[11px] sm:text-[12px] font-bold tracking-[0.22em] uppercase"
+            className="font-serif text-[9.5px] sm:text-[11px] lg:text-[12px] font-bold tracking-[0.18em] sm:tracking-[0.22em] uppercase"
             style={{ color: isDark ? '#FFF8F0' : '#4A154B' }}
           >
             Saree House
           </span>
-          <span className="text-[#D4A827] text-[9px] font-bold">●</span>
-          <span className="text-[9px] tracking-wider font-semibold uppercase text-[#BD3D78]">
+          <span className="hidden xs:inline text-[#D4A827] text-[8px] sm:text-[9px] font-bold">●</span>
+          <span className="hidden xs:inline text-[8.5px] sm:text-[9px] tracking-wider font-semibold uppercase text-[#BD3D78]">
             Estd 2003
           </span>
         </div>

@@ -169,6 +169,17 @@ export function QuickViewModal({ product, isOpen, onClose }) {
 
                 {/* Fast Specs */}
                 <div className="mt-4 bg-[#FFF8F0] border border-[#E8DFE5] rounded-xs p-3 text-xs space-y-1.5 divide-y divide-[#E8DFE5]/60">
+                  {product.designDetail && (
+                    <div className="pb-1.5 pt-0">
+                      <div className="flex items-center gap-1 text-[#BD3D78] font-bold uppercase tracking-wider text-[10px] mb-0.5">
+                        <Sparkles className="w-3 h-3 text-[#F0C860]" />
+                        <span>Signature Weave & Motif Design</span>
+                      </div>
+                      <p className="text-[11.5px] font-semibold text-[#280030] leading-snug">
+                        {product.designDetail}
+                      </p>
+                    </div>
+                  )}
                   <div className="flex justify-between pt-1 first:pt-0">
                     <span className="text-[#706873]">Loom Origin:</span>
                     <span className="font-bold text-[#280030]">{product.origin}</span>
