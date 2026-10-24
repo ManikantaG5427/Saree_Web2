@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { initialProducts, initialCategories } from '../data/mockData.js';
 
 const ProductContext = createContext(null);
-const PRODUCTS_STORAGE_KEY = 'slsh_weaves_products_v12_50_handloom_curations';
-const CATEGORIES_STORAGE_KEY = 'slsh_weaves_categories_v12_50_handloom_curations';
+const PRODUCTS_STORAGE_KEY = 'slsh_weaves_products_v15_coherent_hover_matching_curations';
+const CATEGORIES_STORAGE_KEY = 'slsh_weaves_categories_v15_coherent_hover_matching_curations';
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {

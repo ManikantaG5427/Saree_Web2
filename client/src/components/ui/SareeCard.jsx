@@ -14,8 +14,10 @@ export function SareeCard({ product }) {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
   const isLiked = isInWishlist(product.id);
-  const primaryImage = product.images?.[0] || 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80';
-  const secondaryImage = product.images?.[1] || primaryImage;
+  const primaryImage = product.images?.[0] || '/images/kanjeevaram-crimson-pure.jpg';
+  // ONLY crossfade if product explicitly has a verified matching angle of the EXACT same saree
+  const hasMatchingAngle = Boolean(product.hasMatchingAngle && product.images?.[1] && product.images[1] !== primaryImage);
+  const secondaryImage = hasMatchingAngle ? product.images[1] : null;
 
   const handleQuickAdd = (e) => {
     e.preventDefault();
@@ -44,7 +46,7 @@ export function SareeCard({ product }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Image Container with Crossfade to Angle 2 on hover */}
+        {/* Image Container with Luxury Zoom / Matching Angle Crossfade */}
         <Link to={`/product/${product.slug || product.id}`} className="relative aspect-[3/4] overflow-hidden bg-[#FAF7F2] block">
           {/* Primary Image */}
           <img
@@ -54,22 +56,26 @@ export function SareeCard({ product }) {
               e.currentTarget.onerror = null;
               e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
             }}
-            className={`w-full h-full object-cover object-top transition-opacity duration-700 ${
-              isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+            className={`w-full h-full object-cover object-top transition-all duration-700 ease-out ${
+              hasMatchingAngle && isHovered 
+                ? 'opacity-0 scale-105' 
+                : isHovered 
+                  ? 'opacity-100 scale-108 brightness-[1.02]' 
+                  : 'opacity-100 scale-100 brightness-100'
             }`}
             loading="lazy"
           />
 
-          {/* Secondary Angle (Crossfade on Hover) */}
-          {secondaryImage !== primaryImage && (
+          {/* Secondary Angle (Crossfade ONLY if verified matching angle of the same saree) */}
+          {hasMatchingAngle && secondaryImage && (
             <img
               src={secondaryImage}
-              alt={`${product.name} alternate angle`}
+              alt={`${product.name} matching angle`}
               onError={(e) => {
                 e.currentTarget.onerror = null;
-                e.currentTarget.src = '/images/zari-pallu-macro.jpg';
+                e.currentTarget.src = primaryImage;
               }}
-              className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ${
+              className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ease-out ${
                 isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
               }`}
               loading="lazy"
