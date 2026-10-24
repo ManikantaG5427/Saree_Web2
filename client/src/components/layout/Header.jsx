@@ -178,7 +178,7 @@ export function Header() {
             </div>
 
             {/* Center: Desktop Navigation Bar */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2.5 2xl:gap-4 shrink min-w-0">
+            <nav className="hidden lg:flex items-center gap-2 xl:gap-4.5 2xl:gap-6 flex-shrink-0">
               {/* Dedicated Home Button */}
               <button
                 type="button"
@@ -335,6 +335,24 @@ export function Header() {
                               ✦ Read Handloom Textile Guide
                             </Link>
                           </li>
+                          <li>
+                            <Link 
+                              to="/about" 
+                              onClick={handleNavClick('/about')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
+                              ✦ Our Story & Heritage (Est. 2003)
+                            </Link>
+                          </li>
+                          <li>
+                            <Link 
+                              to="/contact" 
+                              onClick={handleNavClick('/contact')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
+                              ✦ Contact & Store Location
+                            </Link>
+                          </li>
                         </ul>
                       </div>
 
@@ -361,7 +379,7 @@ export function Header() {
               <Link
                 to="/shop?category=Handloom Pattu Sarees"
                 onClick={handleNavClick('/shop?category=Handloom Pattu Sarees')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
+                className="text-[11.5px] xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-2 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Handloom Pattu</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -370,45 +388,18 @@ export function Header() {
               <Link
                 to="/shop?occasion=Weddings"
                 onClick={handleNavClick('/shop?occasion=Weddings')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
+                className="text-[11.5px] xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-2 py-2 whitespace-nowrap shrink-0 relative group"
               >
-                <span>Bridal<span className="hidden xl:inline"> Trousseau</span></span>
+                <span>Bridal Trousseau</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
 
               <Link
                 to="/wholesale"
                 onClick={handleNavClick('/wholesale')}
-                className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#BD3D78] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
+                className="text-[11.5px] xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#BD3D78] hover:text-[#280030] transition-colors px-2 py-2 whitespace-nowrap shrink-0 relative group"
               >
                 <span>Wholesale</span>
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-
-              <Link
-                to="/handloom-guide"
-                onClick={handleNavClick('/handloom-guide')}
-                className="hidden xl:inline-block text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
-              >
-                <span>Weave Guide</span>
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-
-              <Link
-                to="/about"
-                onClick={handleNavClick('/about')}
-                className="hidden xl:inline-block text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
-              >
-                <span>Our Story</span>
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-
-              <Link
-                to="/contact"
-                onClick={handleNavClick('/contact')}
-                className="hidden 2xl:inline-block text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.06em] xl:tracking-[0.1em] uppercase text-[#29232A] hover:text-[#280030] transition-colors px-1.5 py-2 whitespace-nowrap shrink-0 relative group"
-              >
-                <span>Contact</span>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
             </nav>
