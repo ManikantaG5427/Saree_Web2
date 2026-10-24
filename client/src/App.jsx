@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext.jsx';
 import { CartProvider } from './contexts/CartContext.jsx';
 import { ProductProvider } from './contexts/ProductContext.jsx';
@@ -30,6 +30,24 @@ import { Admin } from './pages/Admin.jsx';
 import { NotFound } from './pages/NotFound.jsx';
 
 import './index.css';
+
+// Automatically scroll to top on every route transition
+function ScrollToTop() {
+  const { pathname, search, hash } = useLocation();
+
+  React.useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.replace('#', ''));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, search, hash]);
+
+  return null;
+}
 
 function CustomerLayout() {
   return (
@@ -77,6 +95,7 @@ export default function App() {
           <CartProvider>
             <OrderProvider>
               <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                   {/* Customer Facing Routes Wrapped in CustomerLayout */}
                   <Route element={<CustomerLayout />}>

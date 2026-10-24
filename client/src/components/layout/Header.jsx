@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Menu, 
   X, 
@@ -24,6 +24,7 @@ import { formatPrice } from '../../lib/utils.js';
 
 export function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { itemCount, openCart } = useCart();
   const { wishlistCount } = useWishlist();
@@ -34,6 +35,31 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
+  // Smooth autoscroll to the main hero section
+  const handleHomeClick = (e) => {
+    if (e) e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    if (location.pathname === '/') {
+      const heroEl = document.getElementById('hero') || document.getElementById('main-hero');
+      if (heroEl) {
+        heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      navigate('/', { state: { scrollToHero: true } });
+      setTimeout(() => {
+        const heroEl = document.getElementById('hero') || document.getElementById('main-hero');
+        if (heroEl) {
+          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
 
   // Close menus on route navigation
   useEffect(() => {
@@ -120,13 +146,33 @@ export function Header() {
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
 
-              <Link to="/" className="flex items-center gap-2 group py-1" aria-label="Sri Lakshmi Saree House Home">
+              <Link 
+                to="/" 
+                onClick={handleHomeClick}
+                className="flex items-center gap-2 group py-1 cursor-pointer" 
+                aria-label="Sri Lakshmi Saree House Home"
+              >
                 <Logo variant="full" />
               </Link>
             </div>
 
             {/* Center: Desktop Navigation Bar */}
             <nav className="hidden lg:flex items-center gap-2 xl:gap-3.5 2xl:gap-5 flex-shrink-0">
+              {/* Dedicated Home Button */}
+              <button
+                type="button"
+                onClick={handleHomeClick}
+                className={`text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group cursor-pointer ${
+                  location.pathname === '/' ? 'text-[#280030] font-bold' : 'text-[#29232A] hover:text-[#280030]'
+                }`}
+                aria-label="Home page hero"
+              >
+                <span>Home</span>
+                <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#F0C860] transition-transform duration-300 origin-left ${
+                  location.pathname === '/' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`} />
+              </button>
+
               {/* Collections Dropdown */}
               <div
                 className="relative py-2 group/menu flex-shrink-0"
@@ -466,9 +512,13 @@ export function Header() {
 
             {/* Mobile Links */}
             <div className="p-4 space-y-3 flex-1 text-sm font-semibold uppercase tracking-wider text-[#29232A]">
-              <Link to="/" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <button
+                type="button"
+                onClick={handleHomeClick}
+                className="block w-full text-left py-2 border-b border-stone-100 hover:text-[#280030] cursor-pointer"
+              >
                 Home
-              </Link>
+              </button>
               <Link to="/shop" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
                 Shop All Sarees
               </Link>

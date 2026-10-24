@@ -55,6 +55,7 @@ const shopLinks = [
 ];
 
 const companyLinks = [
+  { label: 'Home', to: '/' },
   { label: 'Our Story', to: '/about' },
   { label: 'Handloom Guide', to: '/handloom-guide' },
   { label: 'Wholesale Enquiries', to: '/wholesale' },
@@ -103,7 +104,9 @@ export function Footer() {
 
           {/* Brand Column (2 cols wide) */}
           <div className="lg:col-span-2 space-y-5">
-            <Logo variant="full" isDark />
+            <Link to="/" className="inline-block hover:opacity-95 transition-opacity" aria-label="Sri Lakshmi Saree House Home">
+              <Logo variant="full" isDark />
+            </Link>
             <p className="text-[#A898B0] text-sm leading-relaxed max-w-sm">
               {BRAND.tagline} Discover timeless Pattu sarees, traditional handloom
               collections, and elegant ethnic wear from Hyderabad's trusted saree house —

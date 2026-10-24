@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   ArrowRight,
   Award,
@@ -156,6 +156,18 @@ export function Home() {
     return true;
   });
 
+  const location = useLocation();
+
+  // Autoscroll directly to main hero section when navigating or clicking Home
+  useEffect(() => {
+    const heroEl = document.getElementById('hero') || document.getElementById('main-hero');
+    if (heroEl) {
+      heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location.pathname, location.key, location.state]);
+
   return (
     <div className="bg-[#FFF8F0] text-[#29232A]">
 
@@ -164,7 +176,9 @@ export function Home() {
           Deep plum background, split layout, strong serif headline
       ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="relative overflow-hidden bg-[#280030] text-[#FFF8F0]"
+        id="hero"
+        data-section="main-hero"
+        className="relative overflow-hidden bg-[#280030] text-[#FFF8F0] scroll-mt-28"
         aria-label="Hero"
       >
         {/* Subtle decorative gold lines */}
