@@ -1,7 +1,7 @@
 # Sri Lakshmi Saree House (SLSH Weaves)
 ### Luxury Handloom E-Commerce Platform · MERN Stack with Razorpay
 
-**Live Production Site:** [https://slsh-weaves.vercel.app](https://slsh-weaves.vercel.app)
+**Live Production Site:** [https://sree-lakshmi-saree-house.vercel.app](https://sree-lakshmi-saree-house.vercel.app) *(also accessible via [slsh-weaves.vercel.app](https://slsh-weaves.vercel.app))*
 
 Built from the physical brand identity of **Sri Lakshmi Saree House (SLSH Weaves)**, established in 2003 in Hyderabad by proprietor Venkateshwarlu. Incorporates the refined editorial presentation of **Taneira** and the textile-first storytelling of **Kankatala**.
 
@@ -82,7 +82,9 @@ npm run dev:server
 npm run build
 ```
 
-### Admin Credentials
-- **Email:** `admin@slshweaves.com`
-- **Password:** `admin123`
-- *(Auto-fill button available on `/login`)*
+### Security & Authentication
+- **Verified Credentials**: Real password checks against stored patron directory (no mock bypasses).
+- **Rate Limiting**: Automatic lockout protection after 5 consecutive failed login attempts.
+- **Password Reset**: Self-service secure password recovery workflow.
+- **Account Deletion**: Full data purge option available in Patron Dashboard.
+- **Admin Access**: `admin@slshweaves.com` / `admin123`

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, MapPin, Package, ShieldCheck, Plus, Trash2, CheckCircle2, Lock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { User, MapPin, Package, ShieldCheck, Plus, Trash2, CheckCircle2, Lock, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.jsx';
 
 export function Profile() {
-  const { user, updateProfile, addAddress, deleteAddress, setDefaultAddress, logout } = useAuth();
+  const navigate = useNavigate();
+  const { user, updateProfile, addAddress, deleteAddress, setDefaultAddress, logout, changePassword, deleteAccount } = useAuth();
 
   const [activeTab, setActiveTab] = useState('profile');
   const [name, setName] = useState(user?.name || '');
@@ -24,6 +26,12 @@ export function Profile() {
   const [currPass, setCurrPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [passMsg, setPassMsg] = useState('');
+  const [passError, setPassError] = useState('');
+
+  // Delete Account Modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState('');
+  const [deleteError, setDeleteError] = useState('');
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
@@ -49,13 +57,44 @@ export function Profile() {
     setNewAddrPin('');
   };
 
-  const handleChangePass = (e) => {
+  const handleChangePass = async (e) => {
     e.preventDefault();
-    if (!newPass) return;
-    setPassMsg('Password updated successfully.');
-    setCurrPass('');
-    setNewPass('');
-    setTimeout(() => setPassMsg(''), 2500);
+    setPassMsg('');
+    setPassError('');
+
+    if (!currPass || !newPass) {
+      setPassError('Please fill in both current and new passwords.');
+      return;
+    }
+
+    if (newPass.length < 6) {
+      setPassError('New password must contain at least 6 characters.');
+      return;
+    }
+
+    const res = await changePassword(currPass, newPass);
+    if (res.success) {
+      setPassMsg('Account password has been successfully updated.');
+      setCurrPass('');
+      setNewPass('');
+      setTimeout(() => setPassMsg(''), 3000);
+    } else {
+      setPassError(res.error || 'Failed to update password.');
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmText.trim().toLowerCase() !== 'delete') {
+      setDeleteError('Please type DELETE to confirm account removal.');
+      return;
+    }
+
+    const res = await deleteAccount();
+    if (res.success) {
+      navigate('/', { replace: true });
+    } else {
+      setDeleteError(res.error || 'Failed to delete account.');
+    }
   };
 
   if (!user) {
@@ -338,48 +377,139 @@ export function Profile() {
             )}
 
             {activeTab === 'password' && (
-              <form onSubmit={handleChangePass} className="space-y-4 text-xs">
-                <h2 className="font-serif text-lg font-bold text-[#280030] border-b border-[#E8DFE5] pb-2">
-                  Change Account Password
-                </h2>
+              <div className="space-y-8">
+                <form onSubmit={handleChangePass} className="space-y-4 text-xs bg-white border border-[#E8DFE5] p-5 rounded-xs">
+                  <h2 className="font-serif text-lg font-bold text-[#280030] border-b border-[#E8DFE5] pb-2">
+                    Change Account Password
+                  </h2>
 
-                {passMsg && (
-                  <div className="p-3 bg-green-50 border border-green-200 text-green-800 rounded-xs">
-                    {passMsg}
+                  {passMsg && (
+                    <div className="p-3 bg-green-50 border border-green-200 text-green-800 rounded-xs flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0" />
+                      <span>{passMsg}</span>
+                    </div>
+                  )}
+
+                  {passError && (
+                    <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-xs flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" />
+                      <span>{passError}</span>
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="block font-semibold text-[#29232A] mb-1">Current Password *</label>
+                    <input
+                      type="password"
+                      required
+                      value={currPass}
+                      onChange={(e) => setCurrPass(e.target.value)}
+                      placeholder="Enter existing password"
+                      className="w-full p-2.5 border border-[#E8DFE5] rounded-xs focus:border-[#280030] outline-none"
+                    />
                   </div>
-                )}
 
-                <div>
-                  <label className="block font-semibold text-[#29232A] mb-1">Current Password</label>
-                  <input
-                    type="password"
-                    value={currPass}
-                    onChange={(e) => setCurrPass(e.target.value)}
-                    className="w-full p-2.5 border border-[#E8DFE5] rounded-xs"
-                  />
+                  <div>
+                    <label className="block font-semibold text-[#29232A] mb-1">New Password (Min 6 chars) *</label>
+                    <input
+                      type="password"
+                      required
+                      value={newPass}
+                      onChange={(e) => setNewPass(e.target.value)}
+                      placeholder="Enter new secure password"
+                      className="w-full p-2.5 border border-[#E8DFE5] rounded-xs focus:border-[#280030] outline-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="px-6 py-2.5 bg-[#280030] text-[#FFF8F0] font-bold uppercase tracking-wider rounded-xs hover:bg-[#3b0347] transition-colors cursor-pointer"
+                  >
+                    Update Password
+                  </button>
+                </form>
+
+                {/* Privacy & Account Deletion Zone */}
+                <div className="bg-red-50/40 border border-red-200 p-5 rounded-xs space-y-3">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                    <div className="space-y-1 flex-1">
+                      <h3 className="font-serif font-bold text-red-900 text-sm">Danger Zone: Delete Patron Account</h3>
+                      <p className="text-xs text-red-700">
+                        Permanently deletes your registered patron credentials, saved delivery addresses, and personal profile from Sri Lakshmi Saree House records. This operation cannot be reversed.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsDeleteModalOpen(true);
+                      setDeleteError('');
+                      setDeleteConfirmText('');
+                    }}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
+                  >
+                    Delete My Account
+                  </button>
                 </div>
-
-                <div>
-                  <label className="block font-semibold text-[#29232A] mb-1">New Password</label>
-                  <input
-                    type="password"
-                    value={newPass}
-                    onChange={(e) => setNewPass(e.target.value)}
-                    className="w-full p-2.5 border border-[#E8DFE5] rounded-xs"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="px-6 py-2.5 bg-[#280030] text-[#FFF8F0] font-bold uppercase tracking-wider rounded-xs hover:bg-[#3b0347] transition-colors"
-                >
-                  Update Password
-                </button>
-              </form>
+              </div>
             )}
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full border border-red-300 rounded-xs p-6 shadow-xl space-y-4">
+            <div className="flex items-center gap-3 text-red-600">
+              <AlertTriangle className="w-6 h-6" />
+              <h3 className="font-serif text-lg font-bold text-[#280030]">Confirm Account Deletion</h3>
+            </div>
+
+            <p className="text-xs text-[#706873]">
+              Are you sure you want to permanently erase your patron account (<strong className="text-[#280030]">{user.email}</strong>)? All saved addresses and active sessions will be terminated immediately.
+            </p>
+
+            {deleteError && (
+              <div className="p-2.5 bg-red-100 text-red-800 text-xs rounded-xs font-medium">
+                {deleteError}
+              </div>
+            )}
+
+            <div className="space-y-1">
+              <label className="block text-xs font-semibold text-[#29232A]">
+                To proceed, type <span className="font-mono text-red-600 font-bold">DELETE</span> below:
+              </label>
+              <input
+                type="text"
+                value={deleteConfirmText}
+                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                placeholder="DELETE"
+                className="w-full p-2.5 border border-[#E8DFE5] rounded-xs text-xs focus:border-red-500 outline-none"
+              />
+            </div>
+
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="px-4 py-2 border border-[#E8DFE5] text-xs font-semibold rounded-xs hover:bg-[#FFF8F0] cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteAccount}
+                className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xs cursor-pointer"
+              >
+                Permanently Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
