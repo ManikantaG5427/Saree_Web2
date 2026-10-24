@@ -265,6 +265,10 @@ export function Home() {
                     key={heroDrapes[activeHeroIndex].id}
                     src={heroDrapes[activeHeroIndex].image}
                     alt={heroDrapes[activeHeroIndex].title}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                    }}
                     className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 animate-in fade-in duration-500"
                     loading="eager"
                     fetchPriority="high"
@@ -388,6 +392,10 @@ export function Home() {
               <img
                 src={cat.image}
                 alt={cat.name}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                }}
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />

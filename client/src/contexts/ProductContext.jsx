@@ -2,25 +2,17 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { initialProducts, initialCategories } from '../data/mockData.js';
 
 const ProductContext = createContext(null);
-const PRODUCTS_STORAGE_KEY = 'slsh_weaves_products_v9_authentic_handloom_fabrics';
-const CATEGORIES_STORAGE_KEY = 'slsh_weaves_categories_v9_authentic_handloom_fabrics';
+const PRODUCTS_STORAGE_KEY = 'slsh_weaves_products_v12_50_handloom_curations';
+const CATEGORIES_STORAGE_KEY = 'slsh_weaves_categories_v12_50_handloom_curations';
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {
     try {
-      // Clean up old keys if present
-      localStorage.removeItem('slsh_weaves_products');
-      localStorage.removeItem('slsh_weaves_products_v2');
-      localStorage.removeItem('slsh_weaves_categories');
-      localStorage.removeItem('slsh_weaves_categories_v2');
-      
       const saved = localStorage.getItem(PRODUCTS_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length >= initialProducts.length) {
-          // Verify that images are the new pure saree images
-          const hasOldImages = parsed.some(p => p.images?.[0]?.includes('unsplash.com') || p.images?.[0]?.includes('kanjeevaram-bridal.jpg'));
-          if (!hasOldImages) return parsed;
+          return parsed;
         }
       }
     } catch (e) {
@@ -35,8 +27,7 @@ export function ProductProvider({ children }) {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length === initialCategories.length) {
-          const hasOldImages = parsed.some(c => c.image?.includes('kanjeevaram-bridal.jpg') || c.image?.includes('unsplash.com'));
-          if (!hasOldImages) return parsed;
+          return parsed;
         }
       }
     } catch (e) {
@@ -80,6 +71,22 @@ export function ProductProvider({ children }) {
     );
   };
 
+  const adjustStock = (id, delta) => {
+    setProducts((prev) =>
+      prev.map((item) => {
+        if (item.id === id) {
+          const newStock = Math.max(0, (item.stock || 0) + delta);
+          return {
+            ...item,
+            stock: newStock,
+            availability: newStock > 0 ? 'IN_STOCK' : 'OUT_OF_STOCK',
+          };
+        }
+        return item;
+      })
+    );
+  };
+
   const deleteProduct = (id) => {
     setProducts((prev) => prev.filter((item) => item.id !== id));
   };
@@ -95,6 +102,7 @@ export function ProductProvider({ children }) {
         categories,
         addProduct,
         updateProduct,
+        adjustStock,
         deleteProduct,
         getProductBySlug,
       }}

@@ -76,8 +76,12 @@ export function Orders() {
                     <div key={idx} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                       <div className="flex items-center gap-4">
                         <img
-                          src={item.image || 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=300&q=80'}
+                          src={item.image || '/images/kanjeevaram-crimson-pure.jpg'}
                           alt={item.name}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                          }}
                           className="w-16 h-20 object-cover rounded-xs border border-[#E8DFE5]"
                         />
                         <div>

@@ -118,7 +118,15 @@ export function ProductDetail() {
                     activeImageIndex === idx ? 'border-[#280030] shadow-md' : 'border-[#E8DFE5] opacity-75 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt={`Angle ${idx + 1}`} className="w-full h-full object-cover" />
+                  <img 
+                    src={img} 
+                    alt={`Angle ${idx + 1}`} 
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                    }}
+                    className="w-full h-full object-cover" 
+                  />
                 </button>
               ))}
             </div>
@@ -134,6 +142,10 @@ export function ProductDetail() {
                 <img
                   src={images[activeImageIndex]}
                   alt={product.name}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                  }}
                   className="w-full h-full object-cover object-top select-none"
                 />
 

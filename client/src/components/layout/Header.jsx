@@ -423,7 +423,15 @@ export function Header() {
                       to={`/product/${p.slug || p.id}`}
                       className="p-3 flex items-center gap-3 hover:bg-[#FFF8F0] transition-colors"
                     >
-                      <img src={p.images[0]} alt={p.name} className="w-10 h-12 object-cover rounded-xs" />
+                      <img 
+                        src={p.images?.[0] || '/images/kanjeevaram-crimson-pure.jpg'} 
+                        alt={p.name} 
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                        }}
+                        className="w-10 h-12 object-cover rounded-xs" 
+                      />
                       <div className="flex-1 min-w-0">
                         <p className="font-serif text-sm font-bold text-[#29232A] truncate">{p.name}</p>
                         <p className="text-xs text-[#706873]">{p.weave} • {p.color}</p>

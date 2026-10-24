@@ -150,6 +150,10 @@ export function CartDrawer() {
                     <img 
                       src={item.product.images?.[0] || '/images/kanjeevaram-bridal.jpg'} 
                       alt={item.product.name}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                      }}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
                     />
                     {item.product.isSilkMark && (

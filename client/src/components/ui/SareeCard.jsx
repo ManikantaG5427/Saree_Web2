@@ -50,6 +50,10 @@ export function SareeCard({ product }) {
           <img
             src={primaryImage}
             alt={product.name}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+            }}
             className={`w-full h-full object-cover object-top transition-opacity duration-700 ${
               isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
             }`}
@@ -61,6 +65,10 @@ export function SareeCard({ product }) {
             <img
               src={secondaryImage}
               alt={`${product.name} alternate angle`}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/images/zari-pallu-macro.jpg';
+              }}
               className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ${
                 isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
               }`}

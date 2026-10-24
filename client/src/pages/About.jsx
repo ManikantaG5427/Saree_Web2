@@ -78,6 +78,10 @@ export function About() {
                 <img
                   src="/images/handloom-artisan-loom.jpg"
                   alt="Traditional handloom master weaver — Sri Lakshmi Saree House"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                  }}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />

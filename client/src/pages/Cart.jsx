@@ -44,8 +44,12 @@ export function Cart() {
                 <div key={item.product.id} className="p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center">
                   <Link to={`/product/${item.product.slug || item.product.id}`} className="w-20 h-26 rounded-xs overflow-hidden bg-[#FAF7F2] flex-shrink-0 border border-[#E8DFE5]">
                     <img
-                      src={item.product.images?.[0] || 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&q=80'}
+                      src={item.product.images?.[0] || '/images/kanjeevaram-crimson-pure.jpg'}
                       alt={item.product.name}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                      }}
                       className="w-full h-full object-cover"
                     />
                   </Link>

@@ -87,6 +87,10 @@ export function QuickViewModal({ product, isOpen, onClose }) {
                 <img
                   src={images[activeImageIndex]}
                   alt={product.name}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                  }}
                   className="w-full h-full object-cover object-top select-none"
                 />
 
@@ -121,7 +125,15 @@ export function QuickViewModal({ product, isOpen, onClose }) {
                         activeImageIndex === idx ? 'border-[#280030] shadow-sm' : 'border-[#E8DFE5] opacity-70 hover:opacity-100'
                       }`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      <img 
+                        src={img} 
+                        alt="" 
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                        }}
+                        className="w-full h-full object-cover" 
+                      />
                     </button>
                   ))}
                 </div>

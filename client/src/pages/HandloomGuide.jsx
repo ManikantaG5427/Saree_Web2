@@ -61,7 +61,15 @@ export function HandloomGuide() {
             className="bg-white border border-[#E8DFE5] rounded-xs overflow-hidden shadow-xs grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-6 sm:p-8"
           >
             <div className="md:col-span-5 aspect-[4/3] rounded-xs overflow-hidden bg-[#300030]">
-              <img src={w.image} alt={w.title} className="w-full h-full object-cover" />
+              <img 
+                src={w.image} 
+                alt={w.title} 
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                }}
+                className="w-full h-full object-cover" 
+              />
             </div>
 
             <div className="md:col-span-7 space-y-3">

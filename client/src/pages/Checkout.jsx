@@ -242,7 +242,15 @@ export function Checkout() {
               <div className="max-h-60 overflow-y-auto divide-y divide-[#E8DFE5] pr-1">
                 {items.map((item) => (
                   <div key={item.product.id} className="py-2.5 flex items-center gap-3">
-                    <img src={item.product.images?.[0]} alt={item.product.name} className="w-12 h-14 object-cover rounded-xs" />
+                    <img 
+                      src={item.product.images?.[0] || '/images/kanjeevaram-crimson-pure.jpg'} 
+                      alt={item.product.name} 
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/images/kanjeevaram-crimson-pure.jpg';
+                      }}
+                      className="w-12 h-14 object-cover rounded-xs" 
+                    />
                     <div className="flex-1 min-w-0 text-xs">
                       <p className="font-bold text-[#29232A] truncate">{item.product.name}</p>
                       <p className="text-[#706873]">Qty: {item.quantity} • Fall & Pico: Free</p>
