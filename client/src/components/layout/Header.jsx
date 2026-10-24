@@ -61,6 +61,26 @@ export function Header() {
     }
   };
 
+  // Universal autoscroll-to-top handler for navbar, mega-menu, and mobile drawer links
+  const handleNavClick = (to) => (e) => {
+    setIsMegaMenuOpen(false);
+    setIsMobileMenuOpen(false);
+
+    if (to === '/') {
+      handleHomeClick(e);
+      return;
+    }
+
+    // Always scroll smoothly to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const currentUrl = location.pathname + location.search;
+    if (currentUrl === to) {
+      if (e) e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   // Close menus on route navigation
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -198,22 +218,38 @@ export function Header() {
                         </h4>
                         <ul className="mt-3 space-y-2 text-xs font-medium text-[#706873]">
                           <li>
-                            <Link to="/shop?category=Handloom Pattu Sarees" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?category=Handloom Pattu Sarees" 
+                              onClick={handleNavClick('/shop?category=Handloom Pattu Sarees')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Pure Kanjeevaram Korvai Pattu
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?category=Uppada Silk Sarees" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?category=Uppada Silk Sarees" 
+                              onClick={handleNavClick('/shop?category=Uppada Silk Sarees')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Uppada Jamdani Light Silks
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?category=Banarasi Brocades" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?category=Banarasi Brocades" 
+                              onClick={handleNavClick('/shop?category=Banarasi Brocades')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Banarasi Kadwa Katan Silks
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?category=Gadwal Handlooms" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?category=Gadwal Handlooms" 
+                              onClick={handleNavClick('/shop?category=Gadwal Handlooms')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Gadwal Sico & Silk Borders
                             </Link>
                           </li>
@@ -227,22 +263,38 @@ export function Header() {
                         </h4>
                         <ul className="mt-3 space-y-2 text-xs font-medium text-[#706873]">
                           <li>
-                            <Link to="/shop?occasion=Weddings" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?occasion=Weddings" 
+                              onClick={handleNavClick('/shop?occasion=Weddings')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Muhurtham & Bridal Trousseau
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?occasion=Festivals" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?occasion=Festivals" 
+                              onClick={handleNavClick('/shop?occasion=Festivals')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Dussehra & Sankranti Festive
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?occasion=Family Celebrations" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?occasion=Family Celebrations" 
+                              onClick={handleNavClick('/shop?occasion=Family Celebrations')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Reception & Sangeet Wear
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?occasion=Traditional Ceremonies" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?occasion=Traditional Ceremonies" 
+                              onClick={handleNavClick('/shop?occasion=Traditional Ceremonies')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Pooja & Housewarming Drapes
                             </Link>
                           </li>
@@ -256,17 +308,29 @@ export function Header() {
                         </h4>
                         <ul className="mt-3 space-y-2 text-xs font-medium text-[#706873]">
                           <li>
-                            <Link to="/shop?category=Dress Materials" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?category=Dress Materials" 
+                              onClick={handleNavClick('/shop?category=Dress Materials')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Pure Silk Dress Materials
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop?category=Fancy & Boutique Sarees" className="hover:text-[#280030] hover:translate-x-1 transition-all block">
+                            <Link 
+                              to="/shop?category=Fancy & Boutique Sarees" 
+                              onClick={handleNavClick('/shop?category=Fancy & Boutique Sarees')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block"
+                            >
                               Organza & Tissue Boutique
                             </Link>
                           </li>
                           <li>
-                            <Link to="/handloom-guide" className="hover:text-[#280030] hover:translate-x-1 transition-all block text-[#BD3D78] font-semibold">
+                            <Link 
+                              to="/handloom-guide" 
+                              onClick={handleNavClick('/handloom-guide')}
+                              className="hover:text-[#280030] hover:translate-x-1 transition-all block text-[#BD3D78] font-semibold"
+                            >
                               ✦ Read Handloom Textile Guide
                             </Link>
                           </li>
@@ -279,7 +343,11 @@ export function Header() {
                           <ShieldCheck className="w-4 h-4 text-[#280030]" />
                           <span>Direct loom weaving with verified Silk Mark authenticity on pure silks.</span>
                         </div>
-                        <Link to="/shop" className="text-[#280030] font-bold uppercase tracking-wider hover:underline flex items-center gap-1">
+                        <Link 
+                          to="/shop" 
+                          onClick={handleNavClick('/shop')}
+                          className="text-[#280030] font-bold uppercase tracking-wider hover:underline flex items-center gap-1"
+                        >
                           <span>View Full Catalogue</span>
                           <ArrowRight className="w-3.5 h-3.5 text-[#F0C860]" />
                         </Link>
@@ -291,6 +359,7 @@ export function Header() {
 
               <Link
                 to="/shop?category=Handloom Pattu Sarees"
+                onClick={handleNavClick('/shop?category=Handloom Pattu Sarees')}
                 className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
               >
                 <span>Handloom Pattu</span>
@@ -299,6 +368,7 @@ export function Header() {
 
               <Link
                 to="/shop?occasion=Weddings"
+                onClick={handleNavClick('/shop?occasion=Weddings')}
                 className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
               >
                 <span>Bridal<span className="hidden xl:inline"> Trousseau</span></span>
@@ -307,6 +377,7 @@ export function Header() {
 
               <Link
                 to="/handloom-guide"
+                onClick={handleNavClick('/handloom-guide')}
                 className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
               >
                 <span>Weave Guide</span>
@@ -315,6 +386,7 @@ export function Header() {
 
               <Link
                 to="/wholesale"
+                onClick={handleNavClick('/wholesale')}
                 className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#BD3D78] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
               >
                 <span>Wholesale</span>
@@ -323,6 +395,7 @@ export function Header() {
 
               <Link
                 to="/about"
+                onClick={handleNavClick('/about')}
                 className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
               >
                 <span>Our Story</span>
@@ -331,6 +404,7 @@ export function Header() {
 
               <Link
                 to="/contact"
+                onClick={handleNavClick('/contact')}
                 className="text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-semibold tracking-[0.08em] xl:tracking-[0.12em] uppercase text-[#29232A] hover:text-[#280030] transition-colors py-2 whitespace-nowrap flex-shrink-0 relative group"
               >
                 <span>Contact</span>
@@ -519,34 +593,74 @@ export function Header() {
               >
                 Home
               </button>
-              <Link to="/shop" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/shop" 
+                onClick={handleNavClick('/shop')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Shop All Sarees
               </Link>
-              <Link to="/shop?category=Handloom Pattu Sarees" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/shop?category=Handloom Pattu Sarees" 
+                onClick={handleNavClick('/shop?category=Handloom Pattu Sarees')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Handloom & Pattu Silks
               </Link>
-              <Link to="/shop?category=Uppada Silk Sarees" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/shop?category=Uppada Silk Sarees" 
+                onClick={handleNavClick('/shop?category=Uppada Silk Sarees')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Uppada Jamdani
               </Link>
-              <Link to="/shop?category=Banarasi Brocades" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/shop?category=Banarasi Brocades" 
+                onClick={handleNavClick('/shop?category=Banarasi Brocades')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Banarasi Brocade
               </Link>
-              <Link to="/shop?category=Dress Materials" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/shop?category=Dress Materials" 
+                onClick={handleNavClick('/shop?category=Dress Materials')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Dress Materials
               </Link>
-              <Link to="/about" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/about" 
+                onClick={handleNavClick('/about')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Our Story (Est. 2003)
               </Link>
-              <Link to="/wholesale" className="block py-2 border-b border-stone-100 text-[#BD3D78]">
+              <Link 
+                to="/wholesale" 
+                onClick={handleNavClick('/wholesale')}
+                className="block py-2 border-b border-stone-100 text-[#BD3D78]"
+              >
                 Wholesale Enquiries
               </Link>
-              <Link to="/contact" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/contact" 
+                onClick={handleNavClick('/contact')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Contact & Store Location
               </Link>
-              <Link to="/handloom-guide" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/handloom-guide" 
+                onClick={handleNavClick('/handloom-guide')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Handloom Guide
               </Link>
-              <Link to="/track-order" className="block py-2 border-b border-stone-100 hover:text-[#280030]">
+              <Link 
+                to="/track-order" 
+                onClick={handleNavClick('/track-order')}
+                className="block py-2 border-b border-stone-100 hover:text-[#280030]"
+              >
                 Track Order
               </Link>
             </div>

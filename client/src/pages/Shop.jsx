@@ -23,12 +23,37 @@ export function Shop() {
   const [sortBy, setSortBy] = useState(sortParam);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // Sync state if URL changes
+  // Sync state if URL changes & smoothly scroll up completely
   React.useEffect(() => {
-    if (searchParams.get('category')) setSelectedCategory(searchParams.get('category'));
-    if (searchParams.get('occasion')) setSelectedOccasion(searchParams.get('occasion'));
+    setSelectedCategory(searchParams.get('category') || 'All');
+    setSelectedOccasion(searchParams.get('occasion') || 'All');
     if (searchParams.get('sort')) setSortBy(searchParams.get('sort'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [searchParams]);
+
+  const handleCategorySelect = (catName) => {
+    setSelectedCategory(catName);
+    const newParams = new URLSearchParams(searchParams);
+    if (catName === 'All') {
+      newParams.delete('category');
+    } else {
+      newParams.set('category', catName);
+    }
+    setSearchParams(newParams);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOccasionSelect = (occName) => {
+    setSelectedOccasion(occName);
+    const newParams = new URLSearchParams(searchParams);
+    if (occName === 'All') {
+      newParams.delete('occasion');
+    } else {
+      newParams.set('occasion', occName);
+    }
+    setSearchParams(newParams);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const fabrics = ['All', 'Pure Mulberry Silk', 'Pure Uppada Silk', 'Pure Katan Silk', 'Fine Cotton Body with Pure Silk Borders', 'Pure Silk Organza'];
   const priceRanges = [
@@ -81,6 +106,7 @@ export function Shop() {
     setOnlySilkMark(false);
     setSortBy('featured');
     setSearchParams({});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -178,7 +204,7 @@ export function Shop() {
                 <h4 className="font-serif text-sm font-bold text-[#280030] mb-2">Category</h4>
                 <div className="space-y-1.5 text-xs text-[#706873]">
                   <button
-                    onClick={() => setSelectedCategory('All')}
+                    onClick={() => handleCategorySelect('All')}
                     className={`block w-full text-left py-1 transition-colors ${
                       selectedCategory === 'All' ? 'text-[#280030] font-bold' : 'hover:text-[#280030]'
                     }`}
@@ -188,7 +214,7 @@ export function Shop() {
                   {categories.map((c) => (
                     <button
                       key={c.id}
-                      onClick={() => setSelectedCategory(c.name)}
+                      onClick={() => handleCategorySelect(c.name)}
                       className={`block w-full text-left py-1 transition-colors ${
                         selectedCategory === c.name ? 'text-[#280030] font-bold' : 'hover:text-[#280030]'
                       }`}
@@ -206,7 +232,7 @@ export function Shop() {
                   {['All', 'Weddings', 'Festivals', 'Traditional Ceremonies', 'Family Celebrations', 'Everyday Wear'].map((occ) => (
                     <button
                       key={occ}
-                      onClick={() => setSelectedOccasion(occ)}
+                      onClick={() => handleOccasionSelect(occ)}
                       className={`block w-full text-left py-1 transition-colors ${
                         selectedOccasion === occ ? 'text-[#280030] font-bold' : 'hover:text-[#280030]'
                       }`}
@@ -313,7 +339,7 @@ export function Shop() {
                   <button
                     key={c.id}
                     onClick={() => {
-                      setSelectedCategory(c.name);
+                      handleCategorySelect(c.name);
                       setIsMobileFilterOpen(false);
                     }}
                     className={`block w-full text-left py-1 ${
