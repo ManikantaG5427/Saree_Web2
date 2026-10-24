@@ -1,6 +1,8 @@
 # Sri Lakshmi Saree House (SLSH Weaves)
 ### Luxury Handloom E-Commerce Platform · MERN Stack with Razorpay
 
+**Live Production Site:** [https://slsh-weaves.vercel.app](https://slsh-weaves.vercel.app)
+
 Built from the physical brand identity of **Sri Lakshmi Saree House (SLSH Weaves)**, established in 2003 in Hyderabad by proprietor Venkateshwarlu. Incorporates the refined editorial presentation of **Taneira** and the textile-first storytelling of **Kankatala**.
 
 ---
