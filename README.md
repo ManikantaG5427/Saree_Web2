@@ -47,18 +47,36 @@ Built from the physical brand identity of **Sri Lakshmi Saree House (SLSH Weaves
 
 ---
 
+## Project Structure
+```text
+Saree_Web2/
+├── client/          # Frontend Web Application (React 19, Vite, Tailwind CSS)
+│   ├── src/         # Components, Pages, Contexts, Hooks, Assets
+│   ├── public/      # Static Assets & Handloom Photography
+│   └── package.json
+├── server/          # Backend REST API (Node.js, Express, MongoDB, Razorpay)
+│   ├── src/         # Routes, Controllers, Models, Middleware
+│   └── package.json
+├── package.json     # Root Monorepo configuration
+└── vercel.json      # Production deployment configuration
+```
+
+---
+
 ## Quick Start
 ```bash
-# Install dependencies
+# Install all dependencies across client and server
 npm install
 
-# Run Frontend Web Storefront (Port 5174 or 5173)
-npm run dev:web
+# Run Client Frontend Storefront (Port 5174 or 5173)
+npm run dev:client
+# or: cd client && npm run dev
 
-# Run Backend Express API (Port 5000)
-npm run dev:api
+# Run Server Backend Express API (Port 5000)
+npm run dev:server
+# or: cd server && npm run dev
 
-# Production Build
+# Production Build Client
 npm run build
 ```
 

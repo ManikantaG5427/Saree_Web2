@@ -4,14 +4,17 @@
   "private": true,
   "description": "Sri Lakshmi Saree House (SLSH Weaves) - Luxury Handloom E-Commerce Platform",
   "workspaces": [
-    "apps/*"
+    "client",
+    "server"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=apps/web",
-    "dev:web": "npm run dev --workspace=apps/web",
-    "dev:api": "npm run dev --workspace=apps/api",
-    "build": "npm run build --workspace=apps/web",
-    "start": "npm run start --workspace=apps/api"
+    "dev": "npm run dev --workspace=client",
+    "dev:client": "npm run dev --workspace=client",
+    "dev:web": "npm run dev --workspace=client",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:api": "npm run dev --workspace=server",
+    "build": "npm run build --workspace=client",
+    "start": "npm run start --workspace=server"
   },
   "keywords": [
     "slsh-weaves",
