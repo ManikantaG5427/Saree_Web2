@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+/* Global Layout & Overflow Containment */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Brand Utility Classes */
+.bg-primary-plum {
+  background-color: #280030;
+}
+.bg-deep-plum {
+  background-color: #300030;
+}
+.bg-champagne-gold {
+  background-color: #F0C860;
+}
+.bg-warm-ivory {
+  background-color: #FFF8F0;
+}
+.text-primary-plum {
+  color: #280030;
+}
+.text-deep-plum {
+  color: #300030;
+}
+.text-champagne-gold {
+  color: #F0C860;
+}
+.text-main-body {
+  color: #29232A;
+}
+.text-secondary-body {
+  color: #706873;
+}
+.border-brand {
+  border-color: #E8DFE5;
+}
+.border-gold {
+  border-color: #F0C860;
+}
+
+/* Custom Scrollbar Hide */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,6 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" rx="20" fill="#280030" />
+  <circle cx="50" cy="50" r="38" stroke="#F0C860" stroke-width="3" fill="none" />
+  <text x="50" y="58" text-anchor="middle" fill="#F0C860" font-family="serif" font-size="22" font-weight="bold">SLSH</text>
+  <circle cx="76" cy="24" r="5" fill="#BD3D78" />
+</svg>

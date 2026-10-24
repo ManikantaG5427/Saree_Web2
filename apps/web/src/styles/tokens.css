@@ -1,0 +1,135 @@
+:root {
+  /* ==========================================================================
+     SLSH WEAVES LUXURY DESIGN SYSTEM
+     Colors extracted & verified directly from Sri Lakshmi Saree House brand identity
+     ========================================================================== */
+  
+  /* Core Brand Plum Surfaces */
+  --color-primary-plum: #280030;
+  --color-deep-plum: #300030;
+  --color-plum-hover: #3b0347;
+  --color-plum-light: #440052;
+
+  /* Champagne Gold Accents */
+  --color-champagne-gold: #F0C860;
+  --color-champagne-gold-hover: #D8AF44;
+  --color-champagne-gold-muted: rgba(240, 200, 96, 0.2);
+
+  /* Backgrounds & Light Surfaces */
+  --color-warm-ivory: #FFF8F0;
+  --color-white: #FFFFFF;
+  --color-surface-soft: #F9F3EA;
+
+  /* Restrained Decorative Accents */
+  --color-rose-pink: #BD3D78;
+  --color-rose-light: #F7E6EF;
+  --color-botanical-green: #426B46;
+  --color-green-light: #EBF2EC;
+
+  /* Readable Editorial Typography */
+  --color-text-main: #29232A;
+  --color-text-secondary: #706873;
+  --color-text-muted: #8E8691;
+  --color-text-light: #FFF8F0;
+
+  /* Borders & Dividers */
+  --color-border: #E8DFE5;
+  --color-border-subtle: #F0E8ED;
+  --color-border-gold: rgba(240, 200, 96, 0.45);
+
+  /* Shadows & Elevation */
+  --shadow-sm: 0 1px 2px rgba(40, 0, 48, 0.05);
+  --shadow-md: 0 4px 12px rgba(40, 0, 48, 0.08);
+  --shadow-lg: 0 12px 28px rgba(40, 0, 48, 0.12);
+  --shadow-luxury: 0 20px 40px -10px rgba(40, 0, 48, 0.2);
+
+  /* Fonts */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-warm-ivory);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF8F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8DFE5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #706873;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Luxury Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Image Zoom and Depth */
+.image-zoom-box {
+  overflow: hidden;
+}
+.image-zoom-box img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.image-zoom-box:hover img {
+  transform: scale(1.05);
+}
+
+/* Subtle Gold Shimmer */
+@keyframes goldShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #F0C860 0%, #FFF4D0 50%, #F0C860 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 4s infinite linear;
+}
