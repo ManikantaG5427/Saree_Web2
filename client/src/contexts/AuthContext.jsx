@@ -230,35 +230,136 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const resetPassword = async (email, newPassword) => {
+  const checkEmailRegistered = (email) => {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const patrons = getStoredPatrons();
+    const matched = patrons.find((p) => p.email.toLowerCase() === cleanEmail);
+    return {
+      isRegistered: !!matched,
+      patron: matched ? { name: matched.name, email: matched.email } : null,
+    };
+  };
+
+  const requestPasswordResetCode = async (email) => {
     setIsLoading(true);
     const cleanEmail = (email || '').trim().toLowerCase();
-    const cleanPass = (newPassword || '').trim();
 
-    if (cleanPass.length < 6) {
+    if (!cleanEmail) {
       setIsLoading(false);
-      return { success: false, error: 'New password must be at least 6 characters long.' };
+      return { success: false, error: 'Please enter your registered email address.' };
     }
 
     try {
+      const patrons = getStoredPatrons();
+      const matched = patrons.find((p) => p.email.toLowerCase() === cleanEmail);
+
+      // Strict enforcement: Only registered emails allowed
+      if (!matched) {
+        setIsLoading(false);
+        return {
+          success: false,
+          notRegistered: true,
+          error: 'This email is not registered with Sri Lakshmi Saree House. Please register first to create an account, then sign in.',
+        };
+      }
+
+      // Generate secure 6-digit verification code & token
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
+      const resetData = {
+        email: cleanEmail,
+        code,
+        expiresAt: Date.now() + 15 * 60 * 1000, // 15 mins validity
+      };
+      localStorage.setItem('slsh_active_password_reset', JSON.stringify(resetData));
+
+      setIsLoading(false);
+      return {
+        success: true,
+        message: `A secure verification code has been dispatched to ${cleanEmail}.`,
+        code, // Provided for user convenience in verification prompt
+        patronName: matched.name,
+      };
+    } catch (err) {
+      setIsLoading(false);
+      return { success: false, error: err.message || 'Failed to dispatch verification code.' };
+    }
+  };
+
+  const verifyResetCodeAndSetPassword = async (email, code, newPassword) => {
+    setIsLoading(true);
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanCode = (code || '').trim();
+    const cleanPass = (newPassword || '').trim();
+
+    if (!cleanCode) {
+      setIsLoading(false);
+      return { success: false, error: 'Please enter the 6-digit verification code.' };
+    }
+
+    if (cleanPass.length < 6) {
+      setIsLoading(false);
+      return { success: false, error: 'New password must contain at least 6 characters.' };
+    }
+
+    try {
+      const storedResetRaw = localStorage.getItem('slsh_active_password_reset');
+      if (!storedResetRaw) {
+        setIsLoading(false);
+        return {
+          success: false,
+          error: 'No active password reset request found. Please request a new verification code.',
+        };
+      }
+
+      const resetData = JSON.parse(storedResetRaw);
+      if (resetData.email !== cleanEmail || resetData.code !== cleanCode) {
+        setIsLoading(false);
+        return {
+          success: false,
+          error: 'Invalid verification code entered. Please check the code sent to your email or request a new one.',
+        };
+      }
+
+      if (Date.now() > resetData.expiresAt) {
+        setIsLoading(false);
+        localStorage.removeItem('slsh_active_password_reset');
+        return {
+          success: false,
+          error: 'Verification code has expired (15-minute window). Please request a fresh reset code.',
+        };
+      }
+
+      // Code is valid - update patron password
       const patrons = getStoredPatrons();
       const index = patrons.findIndex((p) => p.email.toLowerCase() === cleanEmail);
 
       if (index === -1) {
         setIsLoading(false);
-        return { success: false, error: 'No account registered with this email address.' };
+        return {
+          success: false,
+          notRegistered: true,
+          error: 'This email is not registered with Sri Lakshmi Saree House. Please register first, then sign in.',
+        };
       }
 
       patrons[index].password = cleanPass;
       saveStoredPatrons(patrons);
+      localStorage.removeItem('slsh_active_password_reset');
       clearFailedAttempts();
 
       setIsLoading(false);
-      return { success: true, message: 'Password has been securely reset. You can now sign in.' };
+      return {
+        success: true,
+        message: 'Password has been verified and updated successfully! You can now sign in.',
+      };
     } catch (err) {
       setIsLoading(false);
-      return { success: false, error: err.message || 'Failed to reset password.' };
+      return { success: false, error: err.message || 'Failed to verify code and reset password.' };
     }
+  };
+
+  const resetPassword = async (email, newPassword) => {
+    return requestPasswordResetCode(email);
   };
 
   const deleteAccount = async () => {
@@ -347,6 +448,9 @@ export function AuthProvider({ children }) {
         register,
         logout,
         resetPassword,
+        checkEmailRegistered,
+        requestPasswordResetCode,
+        verifyResetCodeAndSetPassword,
         deleteAccount,
         changePassword,
         updateProfile,

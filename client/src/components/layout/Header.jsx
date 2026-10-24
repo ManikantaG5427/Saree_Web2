@@ -66,47 +66,48 @@ export function Header() {
 
   return (
     <>
-      {/* ================= SECTION A: ANNOUNCEMENT STRIP ================= */}
-      <div className="bg-[#280030] text-[#FFF8F0] border-b border-[#F0C860]/30 py-1.5 px-4 text-xs font-medium">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Left: Concise Verified Brand Heritage */}
-          <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
-            <span className="bg-[#F0C860] text-[#280030] font-bold px-2 py-0.5 rounded-xs text-[9px] uppercase tracking-widest flex items-center gap-1 shadow-xs">
-              <Award className="w-3 h-3" />
-              Established 2003
-            </span>
-            <span className="text-stone-300 text-[11px] tracking-wide truncate">
-              Pattu Sarees • Wholesale & Retail • Hyderabad • Complimentary Fall & Pico
-            </span>
-          </div>
+      {/* ================= FIXED TOP NAVIGATION (ALWAYS PINNED ON SCROLL) ================= */}
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#F0C860]/40 shadow-sm transition-all">
+        {/* ================= SECTION A: ANNOUNCEMENT STRIP ================= */}
+        <div className="bg-[#280030] text-[#FFF8F0] border-b border-[#F0C860]/30 py-1.5 px-4 text-xs font-medium">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            {/* Left: Concise Verified Brand Heritage */}
+            <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
+              <span className="bg-[#F0C860] text-[#280030] font-bold px-2 py-0.5 rounded-xs text-[9px] uppercase tracking-widest flex items-center gap-1 shadow-xs">
+                <Award className="w-3 h-3" />
+                Established 2003
+              </span>
+              <span className="text-stone-300 text-[11px] tracking-wide truncate">
+                Pattu Sarees • Wholesale & Retail • Hyderabad • Complimentary Fall & Pico
+              </span>
+            </div>
 
-          {/* Right: Verified WhatsApp & Video Drape */}
-          <div className="flex items-center gap-4 text-[11px] flex-shrink-0">
-            <button
-              onClick={() => setIsVideoModalOpen(true)}
-              className="hidden md:flex items-center gap-1.5 text-[#F0C860] hover:text-white transition-colors cursor-pointer"
-            >
-              <Video className="w-3.5 h-3.5" />
-              <span>WhatsApp Video Drape</span>
-            </button>
+            {/* Right: Verified WhatsApp & Video Drape */}
+            <div className="flex items-center gap-4 text-[11px] flex-shrink-0">
+              <button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="hidden md:flex items-center gap-1.5 text-[#F0C860] hover:text-white transition-colors cursor-pointer"
+              >
+                <Video className="w-3.5 h-3.5" />
+                <span>WhatsApp Video Drape</span>
+              </button>
 
-            <span className="hidden sm:inline text-stone-600">|</span>
+              <span className="hidden sm:inline text-stone-600">|</span>
 
-            <a
-              href="https://wa.me/918639140385?text=Hello%20Sri%20Lakshmi%20Saree%20House,%20I%20would%20like%20to%20inquire%20about%20your%20Pattu%20sarees"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 text-white hover:text-[#F0C860] transition-colors"
-            >
-              <span className="text-[#426B46] font-bold">●</span>
-              <span>WhatsApp: +91 86391 40385</span>
-            </a>
+              <a
+                href="https://wa.me/918639140385?text=Hello%20Sri%20Lakshmi%20Saree%20House,%20I%20would%20like%20to%20inquire%20about%20your%20Pattu%20sarees"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-white hover:text-[#F0C860] transition-colors"
+              >
+                <span className="text-[#426B46] font-bold">●</span>
+                <span>WhatsApp: +91 86391 40385</span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* ================= SECTION B: MAIN NAVIGATION (STICKY) ================= */}
-      <header className="sticky top-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#F0C860]/40 shadow-xs">
+        {/* ================= SECTION B: MAIN NAVIGATION ================= */}
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 sm:h-[84px] gap-2 lg:gap-6">
             {/* Left: Mobile Toggle & Brand Logo */}
@@ -436,6 +437,9 @@ export function Header() {
           </div>
         )}
       </header>
+
+      {/* Fixed Header Spacer: Prevents page content from getting hidden under fixed navbar */}
+      <div className="h-[112px] sm:h-[120px] w-full shrink-0" aria-hidden="true" />
 
       {/* Mobile Menu Drawer */}
       {isMobileMenuOpen && (
